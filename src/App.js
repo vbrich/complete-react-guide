@@ -1,23 +1,42 @@
-// import React from 'react'; 
+import React, { Component } from 'react'; 
 import './App.css';
+import Person from './Person/Person';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hi, I'm a React App!</h1>
-      <p>This is really working...</p>
-    </div>
+class App extends Component {
 
-    // React is doing this with the JSX for us...
-    // - The code above is NOT HTML, but JSX
-    // - It is just doing this, but JSX helps remove the cumbersome effort of doing this
-    // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!'))
+  // The Class-based approach to create components uses a state property for stateful components
+  state = {
+    persons: [
+      { name: 'Rich', age: 46 },
+      { name: 'Joe', age: 22 },
+      { name: 'Beth', age:11 }
+    ],
+    otherState: 'some other value'
+  };
+  
+  // This function/method handles our button event and merges new state information
+  switchNameHandler = () => {
+    this.setState({
+      persons: [
+        { name: 'Rich', age: 40 },
+        { name: 'Joseph', age: 22 },
+        { name: 'Beth', age:31 }
+      ]
+    });
+  }
 
-    // JSX is Javascript, so we can't use certain keywords. "className" is JSX's variable to compile to "class". 
-    // Also, every <div>, etc is actually just the JSX name, but it really looks like HTML. 
-
-    // Normally, we want our JSX to return a single container element (e.g. <div>)
-  );
+  render() {
+    return(
+      <div className='App'>
+        <h1>I'm a React App!</h1>
+        <p>This is really working</p>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>I like peanut butter</Person>
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+      </div>
+    );
+  }
 }
 
 export default App;
