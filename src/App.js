@@ -7,15 +7,9 @@ class App extends Component {
   // The Class-based approach to create components uses a state property for stateful components
   state = {
     persons: [
-<<<<<<< HEAD
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
-=======
       { name: 'Rich', age: 46 },
       { name: 'Joe', age: 22 },
       { name: 'Beth', age:19 }
->>>>>>> 6e13060193665f633c8d678e1c803dee35fd9101
     ],
     otherState: 'some other value'
   }
