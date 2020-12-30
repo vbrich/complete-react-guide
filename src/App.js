@@ -55,17 +55,11 @@ class App extends Component {
       // persons holds my JSX code that I can inject to be returned. Because we are outside Render(), I can just write pure JS.
       persons = (
         <div>
-          <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age} />
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Max!')}
-            changed={this.nameChangedHandler} >My Hobbies (child properties): Racing</Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age} />
+          {this.state.persons.map(person => {
+            return <Person 
+            name={person.name} 
+            age={person.age}/>
+          })}
         </div> 
       );
     }
