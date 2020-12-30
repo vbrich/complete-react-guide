@@ -37,7 +37,9 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons; // reference type (pointer) so constant
+    // const persons = this.state.persons; // Option 1 - reference type (pointer) so constant - not great
+    // const persons = this.state.persons.slice(); // Option 2 - get a copy of the array using splice(), which is better than messing with original state object
+    const persons = [...this.state.persons]; // Option 3 - spread operator to get list of elements and put it in this array
     persons.splice(personIndex, 1); // remove 1 element from the array
     this.setState({persons: persons}); 
   }
