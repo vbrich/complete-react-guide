@@ -26,14 +26,24 @@ class App extends Component {
   }
 */
 
-  nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    } )
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    }); //execute function on every element in array, return true if right person
+
+    // don't mutate our reference variable. We are just copying our object details into this new Person object
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    // const person = Object.assign({}, this.state.persons[personIndex]); // alternative
+
+    person.name = event.target.value; // just update our new object (the name)
+
+    // now, we update our separate persons array
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( {persons: persons} ); // Now, we use React's setState to update our state using the new array... but we avoided direct state mutation
   }
 
   deletePersonHandler = (personIndex) => {
@@ -70,7 +80,8 @@ class App extends Component {
             click={() => this.deletePersonHandler(index)}
             name={person.name} 
             age={person.age}
-            key={person.id}/>
+            key={person.id}
+            changed={(event) => this.nameChangedHandler(event, person.id)}/>
           })}
         </div> 
       );
